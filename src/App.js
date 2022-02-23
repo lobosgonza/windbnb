@@ -1,15 +1,19 @@
-import logo from './logo.svg';
+
 import Data from "./stays.json";
+import Nav from "./components/Nav";
+import Footer from "./components/Footer";
+import Stays from "./components/Stays";
+
 
 
 function App() {
 
-  console.log(Data);
-  return (
-    <div className="App">
-     <h1>Hola Mundo</h1>
-     <img src={logo}></img> 
-    </div>
+
+  return (<>
+<Nav/>
+<Stays/>
+<Footer/>
+</>
   );
 }
 
