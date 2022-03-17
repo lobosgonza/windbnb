@@ -1,8 +1,15 @@
 import React from "react";
 import logo from "../logo.svg";
-import Data from "../stays.json";
 
 function Nav() {
+
+
+
+function handleSubmit(event){
+  event.preventDefault();
+  console.log("hola");
+}
+
   return (
     <>
       {/* Top Nav */}
@@ -34,7 +41,7 @@ function Nav() {
                 placeholder="Guests"
               ></input>
             </label>
-            <button className="btn btn-outline-danger" type="submit">
+            <button className="btn btn-outline-npm sdanger" type="submit">
               Search
             </button>
           </form>
@@ -52,46 +59,47 @@ function Nav() {
       >
         <div className="modal-dialog ">
           <div className="modal-content">
-
-
             <div className="modal-body">
-           <div className="modalContentBorder">
-           <form>
-                <div className="row formContainer">
-                  <div className=" col-md-5 colModalStyleA">
-                    <div className="  form-floating">
-                      <input
-                        type="email"
-                        className="  form-control formControlleft"
-                        id="floatingInputValueLocation"
-                      ></input>
-                      <label for="floatingInputValueLocation">Location</label>
+              <div className="modalContentBorder">
+                <form>
+                  <div className="row formContainer">
+                    <div className=" col-md-5 colModalStyleA">
+                      <div className="  form-floating">
+                        <input
+                          type="email"
+                          name="location"
+                          className="  form-control formControlleft"
+                          id="floatingInputValueLocation"
+                        ></input>
+                        <label for="floatingInputValueLocation">Location</label>
+                      </div>
+                    </div>
+                    <div className="  col-md-5 colModalStyleB">
+                      <div className=" form-floating">
+                        <input
+                          type="text"
+                          className=" form-control formControlCenter"
+                          id="floatingInputValueGuests"
+                        ></input>
+                        <label for="floatingInputValueGuests">Guests</label>
+                      </div>
+                    </div>
+
+                    <div className="col-md-2 formControlRight position-relative ">
+                      <div className=" position-absolute top-50 start-50 translate-middle">
+                        <button
+                          className="btn btn-danger npm startbtn-modal"
+                          type="submit"
+                          onClick={handleSubmit}
+                        >
+                          Search
+                        </button>
+                      </div>
                     </div>
                   </div>
-                  <div className="  col-md-5 colModalStyleB">
-                    <div className=" form-floating">
-                      <input
-                        type="text"
-                        className=" form-control formControlCenter"
-                        id="floatingInputValueGuests"
-                      ></input>
-                      <label for="floatingInputValueGuests">Guests</label>
-                    </div>
-                  </div>
-
-                  <div className="col-md-2 formControlRight position-relative ">
-                  <div className=" position-absolute top-50 start-50 translate-middle">
-
-                    <button className="btn btn-danger btn-modal" type="submit">
-                      Search
-                    </button>
-                  </div>
-                  </div>
-                </div>
-              </form>
-           </div>
+                </form>
+              </div>
             </div>
-
           </div>
         </div>
       </div>
