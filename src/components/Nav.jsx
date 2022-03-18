@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import logo from "../logo.svg";
 
-function Nav() {
+function Nav(props) {
 
+  const [inputRecorded, setInputRecorded] = useState({
+    locationRecorded: "",
+    guestsRecorded: "",
+  });
 
+  function handleSubmit(event) {
+    event.preventDefault();
+    const getLocationSearch = event.target.location.value;
+    const getGuestsSearch = event.target.guests.value;
+    
+    console.log(getLocationSearch);
+    console.log(getGuestsSearch);
 
-function handleSubmit(event){
-  event.preventDefault();
-  console.log("hola");
-}
+    setInputRecorded({
+      locationRecorded: getLocationSearch,
+      guestsRecorded: getGuestsSearch,
+    });
+
+props.placeLookFor(inputRecorded.locationRecorded)
+
+  }
 
   return (
     <>
@@ -27,6 +42,7 @@ function handleSubmit(event){
                 type="search"
                 aria-label="Search"
                 placeholder="Location"
+                value={inputRecorded.locationRecorded}
               ></input>
             </label>
 
@@ -39,6 +55,7 @@ function handleSubmit(event){
                 type="search"
                 aria-label="Search"
                 placeholder="Guests"
+                value={inputRecorded.guestsRecorded}
               ></input>
             </label>
             <button className="btn btn-outline-npm sdanger" type="submit">
@@ -61,12 +78,12 @@ function handleSubmit(event){
           <div className="modal-content">
             <div className="modal-body">
               <div className="modalContentBorder">
-                <form>
+                <form onSubmit={handleSubmit}>
                   <div className="row formContainer">
                     <div className=" col-md-5 colModalStyleA">
                       <div className="  form-floating">
                         <input
-                          type="email"
+                          type="text"
                           name="location"
                           className="  form-control formControlleft"
                           id="floatingInputValueLocation"
@@ -78,6 +95,7 @@ function handleSubmit(event){
                       <div className=" form-floating">
                         <input
                           type="text"
+                          name="guests"
                           className=" form-control formControlCenter"
                           id="floatingInputValueGuests"
                         ></input>
@@ -90,7 +108,7 @@ function handleSubmit(event){
                         <button
                           className="btn btn-danger npm startbtn-modal"
                           type="submit"
-                          onClick={handleSubmit}
+                          data-bs-dismiss="modal"
                         >
                           Search
                         </button>
