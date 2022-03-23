@@ -1,3 +1,8 @@
+.paddingGeneral {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
 .modal-dialog {
   max-width: 100%;
   margin: 0%;
@@ -81,6 +86,28 @@ input:focus {
 
 .material-icons.red600 {
   color: #eb5757;
+}
+
+.card {
+  border: none;
+}
+
+.imgCardStyling {
+  height: 269px;
+  object-fit: cover;
+  border-radius: 25px;
+}
+
+.noResultContainer {
+  height: 75vh;
+}
+
+.noResultParagraph {
+  text-align: center;
+}
+
+li {
+  list-style-type: none;
 }
 
 /*# sourceMappingURL=index.css.map */

@@ -2,27 +2,50 @@ import React, { useState } from "react";
 import logo from "../logo.svg";
 
 function Nav(props) {
-
+  // Save the request into the inputs
   const [inputRecorded, setInputRecorded] = useState({
-    locationRecorded: "",
-    guestsRecorded: "",
+    location: "Helsinki",
+    guests: "",
   });
 
+  //Save the las 5 queries
+
+  const [queriesListArray, setQueriesListArray] = useState([inputRecorded.location ]);
+
+  function handleChange(event) {
+    const { value, name } = event.target;
+
+    setInputRecorded((prevItem) => {
+      return {
+        ...prevItem,
+        [name]: value,
+      };
+    });
+  }
+
+
+
+// Activate the submit query
   function handleSubmit(event) {
     event.preventDefault();
-    const getLocationSearch = event.target.location.value;
-    const getGuestsSearch = event.target.guests.value;
-    
-    console.log(getLocationSearch);
-    console.log(getGuestsSearch);
+    props.placeLookFor(inputRecorded);
 
-    setInputRecorded({
-      locationRecorded: getLocationSearch,
-      guestsRecorded: getGuestsSearch,
+
+    // Change the recent queries list
+    setQueriesListArray((prevItem) => {
+if (queriesListArray.every((currentValue) =>  currentValue === inputRecorded.location) === false){
+        // If the array lenght is less or equal than 4 items
+      if (queriesListArray.length <= 4) {
+        console.log([inputRecorded.location, ...prevItem]);
+        return [inputRecorded.location, ...prevItem];
+      } else {
+        prevItem.pop();
+        console.log([inputRecorded.location, ...prevItem]);
+        return [inputRecorded.location, ...prevItem];
+      }} else {
+        return queriesListArray
+      }
     });
-
-props.placeLookFor(inputRecorded.locationRecorded)
-
   }
 
   return (
@@ -33,7 +56,7 @@ props.placeLookFor(inputRecorded.locationRecorded)
           <a className="navbar-brand">
             <img src={logo}></img>
           </a>
-          <form className="d-flex">
+          <form className="d-flex" onSubmit={handleSubmit}>
             <label htmlFor="">
               <input
                 data-bs-toggle="modal"
@@ -42,7 +65,9 @@ props.placeLookFor(inputRecorded.locationRecorded)
                 type="search"
                 aria-label="Search"
                 placeholder="Location"
-                value={inputRecorded.locationRecorded}
+                value={inputRecorded.location}
+                onChange={handleChange}
+                name="location"
               ></input>
             </label>
 
@@ -55,10 +80,12 @@ props.placeLookFor(inputRecorded.locationRecorded)
                 type="search"
                 aria-label="Search"
                 placeholder="Guests"
-                value={inputRecorded.guestsRecorded}
+                value={inputRecorded.guests}
+                onChange={handleChange}
+                name="guests"
               ></input>
             </label>
-            <button className="btn btn-outline-npm sdanger" type="submit">
+            <button className="btn btn-danger " type="submit">
               Search
             </button>
           </form>
@@ -74,9 +101,11 @@ props.placeLookFor(inputRecorded.locationRecorded)
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
+
+        {/* Here it start the modal box */}
         <div className="modal-dialog ">
           <div className="modal-content">
-            <div className="modal-body">
+            <div className="modal-body container">
               <div className="modalContentBorder">
                 <form onSubmit={handleSubmit}>
                   <div className="row formContainer">
@@ -87,6 +116,8 @@ props.placeLookFor(inputRecorded.locationRecorded)
                           name="location"
                           className="  form-control formControlleft"
                           id="floatingInputValueLocation"
+                          onChange={handleChange}
+                          value={inputRecorded.location}
                         ></input>
                         <label for="floatingInputValueLocation">Location</label>
                       </div>
@@ -94,10 +125,12 @@ props.placeLookFor(inputRecorded.locationRecorded)
                     <div className="  col-md-5 colModalStyleB">
                       <div className=" form-floating">
                         <input
-                          type="text"
+                          type="number"
                           name="guests"
                           className=" form-control formControlCenter"
                           id="floatingInputValueGuests"
+                          onChange={handleChange}
+                          value={inputRecorded.guests}
                         ></input>
                         <label for="floatingInputValueGuests">Guests</label>
                       </div>
@@ -106,7 +139,7 @@ props.placeLookFor(inputRecorded.locationRecorded)
                     <div className="col-md-2 formControlRight position-relative ">
                       <div className=" position-absolute top-50 start-50 translate-middle">
                         <button
-                          className="btn btn-danger npm startbtn-modal"
+                          className="btn btn-danger btn-modal"
                           type="submit"
                           data-bs-dismiss="modal"
                         >
@@ -114,6 +147,19 @@ props.placeLookFor(inputRecorded.locationRecorded)
                         </button>
                       </div>
                     </div>
+                  </div>
+
+                  {/* Last Requests list */}
+                  <div className="row">
+
+                  <ul className="lastQueries paddingGeneral">
+         { queriesListArray.map((item)=>{
+                   return <li><span class="material-icons">place</span> {item}</li>
+                  })}
+
+        
+                  </ul>
+            
                   </div>
                 </form>
               </div>

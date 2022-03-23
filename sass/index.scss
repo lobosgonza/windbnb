@@ -1,3 +1,9 @@
+.paddingGeneral{
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+
 .modal-dialog {
   max-width: 100%;
   margin: 0%;
@@ -88,4 +94,41 @@ input:focus {
 // Change the star color to red
 .material-icons.red600 {
   color: #eb5757;
+}
+
+// Card Stying
+
+.card{
+  border: none;
+}
+
+// img same size
+
+.imgCardStyling{
+  height: 269px;
+object-fit: cover;
+  border-radius: 25px;
+}
+
+.noResultContainer{
+  height: 75vh;
+}
+
+.noResultParagraph{
+text-align: center;
+  // margin: 50%;
+}
+
+
+// Last queries list
+.lastQueries{
+
+}
+
+
+// Delete Bullet of li
+
+li {
+  list-style-type: none; 
+
 }
